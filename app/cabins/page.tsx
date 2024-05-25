@@ -4,9 +4,10 @@ export const metadata = {
 
 import CabinCard from "@/app/_components/CabinCard";
 
-export default function Page() {
-  // CHANGE
-  const cabins: any[] = [];
+import { getCabins } from "../_lib/data-service";
+
+export default async function Page() {
+  const cabins = await getCabins();
 
   return (
     <div>
