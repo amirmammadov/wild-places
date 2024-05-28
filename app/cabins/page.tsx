@@ -4,6 +4,8 @@ import Spinner from "@/app/_components/Spinner";
 
 import { Suspense } from "react";
 
+export const revalidate = 15;
+
 export const metadata = {
   title: "Cabins",
 };

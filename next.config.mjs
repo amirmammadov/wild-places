@@ -9,7 +9,10 @@ const nextConfig = {
         pathname: "/storage/v1/object/public/cabin-images/**",
       },
     ],
+    // loader: "custom",
+    // loaderFile: "./my-loader.ts",
   },
+  // output: "export",
 };
 
 export default nextConfig;
