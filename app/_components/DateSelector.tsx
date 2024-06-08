@@ -1,5 +1,9 @@
 "use client";
 
+import { SetStateAction } from "react";
+
+import { useReservation, ReservationState } from "./ReservationContext";
+
 import { isWithinInterval } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
@@ -23,20 +27,24 @@ function DateSelector({
   bookedDates: any;
   cabin: any;
 }) {
+  const { range, setRange, resetRange } = useReservation();
+
   const regularPrice = 23;
   const discount = 23;
   const numNights = 23;
   const cabinPrice = 23;
-  const range = { from: null, to: null };
 
-  const minBookingLength = 1;
-  const maxBookingLength = 23;
+  const { minBookingLength, maxBookingLength } = settings;
 
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
         className="pt-12 place-self-center"
         mode="range"
+        selected={range}
+        onSelect={(range) =>
+          setRange(range as SetStateAction<ReservationState>)
+        }
         min={minBookingLength + 1}
         max={maxBookingLength}
         fromMonth={new Date()}
@@ -74,10 +82,10 @@ function DateSelector({
           ) : null}
         </div>
 
-        {range.from || range.to ? (
+        {range?.from || range?.to ? (
           <button
             className="border border-primary-800 py-2 px-4 text-sm font-semibold"
-            // onClick={() => resetRange()}
+            onClick={resetRange}
           >
             Clear
           </button>

@@ -18,7 +18,10 @@ function ReservationForm({ cabin }: { cabin: any }) {
           </div> */}
       </div>
 
-      <form className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col">
+      <form
+        className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col"
+        style={{ height: "420px" }}
+      >
         <div className="space-y-2">
           <label htmlFor="numGuests">How many guests?</label>
           <select

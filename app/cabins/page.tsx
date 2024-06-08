@@ -2,6 +2,7 @@ import CabinsList from "../_components/CabinsList";
 
 import Spinner from "@/app/_components/Spinner";
 import Filter from "@/app/_components/Filter";
+import ReservationReminder from "@/app/_components/ReservationReminder";
 
 import { Suspense } from "react";
 
@@ -36,6 +37,7 @@ export default function Page({
 
       <Suspense fallback={<Spinner />} key={filter}>
         <CabinsList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );
