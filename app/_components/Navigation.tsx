@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { auth } from "@/app/_lib/auth";
 
@@ -30,11 +31,13 @@ export default async function Navigation() {
               href="/account"
               className="hover:text-accent-400 transition-colors flex items-center gap-4"
             >
-              <img
+              <Image
                 src={session.user.image}
-                alt={session.user.name}
-                referrerPolicy="no-refferer"
-                className="h-8 rounded-full"
+                alt={session.user.name ?? "User"}
+                referrerPolicy="no-referrer"
+                width={32} // specify width
+                height={32} // specify height
+                className="rounded-full"
               />
               <span>Guest area</span>
             </Link>
