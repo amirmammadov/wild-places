@@ -8,7 +8,37 @@ import { supabase } from "./supabase";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const deleteReservation = async (bookingId: number) => {
+export async function createBooking(bookingData: any, formData: any) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("You must be logged in!");
+  }
+
+  const newBooking = {
+    ...bookingData,
+    //@ts-ignore
+    guestId: session.user.guestId,
+    numGuests: Number(formData.get("numGuests")),
+    observations: formData.get("observations").slice(0, 1000),
+    extraPrice: 0,
+    totalPrice: bookingData.cabinPrice,
+    isPaid: false,
+    hasBreakfast: false,
+    status: "unconfirmed",
+  };
+
+  const { error } = await supabase.from("bookings").insert([newBooking]);
+
+  if (error) {
+    throw new Error("Booking could not be created!");
+  }
+
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
+
+  redirect("/cabins/thankyou");
+}
+
+export const deleteBooking = async (bookingId: number) => {
   const session = await auth();
   if (!session) {
     throw new Error("You must be logged in !");
