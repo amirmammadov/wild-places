@@ -6,7 +6,7 @@ import { createBooking } from "../_lib/actions";
 import SubmitButton from "./SubmitButton";
 
 function ReservationForm({ cabin, user }: { cabin: any; user: any }) {
-  const { range, resetRange } = useReservation();
+  const { range = { from: null, to: null }, resetRange } = useReservation();
   const { maxCapacity, regularPrice, discount, id } = cabin;
 
   const startDate = range.from;
